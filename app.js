@@ -8,10 +8,14 @@
 
 const express = require('express');
 const logger = require('morgan');
+const bodyParser = require('body-parser');
 
 // Calling the express function will create
 // an instance of a Express web server
 const app = express();
+
+// Configure our Express app to use ejs as our templating engine
+app.set('view engine', 'ejs');
 
 // unlike app.get, app.use will match for all HTTP verbs
 // If we do not give a path as the first argument, it will match for
@@ -29,6 +33,7 @@ app.use(function (request, response, next) {
 */
 
 app.use(logger('dev'));
+app.use(bodyParser.urlencoded({extended: false}));
 
 // making a part of the relative url begin with :, will make
 // that matched section available as data in request.params under a
@@ -44,6 +49,26 @@ app.get('/hello/:name', function (request, response) {
   //   reply with to the client. It also contains http headers, our own data, etc.
   const name = request.params.name || 'World';
   response.send(`Hello, ${name}!`);
+});
+
+// URL: http://localhost:4545/ HTTP VERB: GET
+app.get('/', function (request, response) {
+  // response.render's first argument is the location and name
+  // of a template we want render beginning at views/
+  response.render('index');
+});
+
+// URL: http://localhost:4545/contact HTTP VERB: GET
+app.get('/contact', function (request, response) {
+  response.render('contact', {contact: {}});
+});
+
+// URL: http://localhost:4545/contact HTTP VERB: POST
+app.post('/contact', function (request, response) {
+  // when a form post is parsed by bodyParser,
+  // its data is formatted as a javascript object and it
+  // assigned to the body property of request
+  response.render('contact', {contact: request.body});
 });
 
 // PORT is uppercased because we intend to be a constant.
