@@ -7,6 +7,7 @@
 // Step 7: Install nodemon & add start script
 
 const express = require('express');
+const logger = require('morgan');
 
 // Calling the express function will create
 // an instance of a Express web server
@@ -15,6 +16,7 @@ const app = express();
 // unlike app.get, app.use will match for all HTTP verbs
 // If we do not give a path as the first argument, it will match for
 // every URL
+/*
 app.use(function (request, response, next) {
   console.log(`📝 ${request.method} – ${request.path} – ${new Date().toString()}`);
   // next, a function and third argument of a middleware callback,
@@ -24,6 +26,9 @@ app.use(function (request, response, next) {
   // the browser will appear to never stop loading when accessing a URL
   // on your server
 });
+*/
+
+app.use(logger('dev'));
 
 // making a part of the relative url begin with :, will make
 // that matched section available as data in request.params under a
