@@ -5,8 +5,14 @@
   "main": "app.js",
   "author": "Steve Godin",
   "license": "MIT",
+  "scripts" : {
+    "start" : "nodemon app.js"
+  },
   "dependencies": {
     "express": "^4.15.3",
     "faker": "^4.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
