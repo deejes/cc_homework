@@ -7,6 +7,7 @@
 // Step 7: Install nodemon & add start script
 
 const express = require('express');
+const path = require('path');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 
@@ -33,6 +34,10 @@ app.use(function (request, response, next) {
 */
 
 app.use(logger('dev'));
+// __dirname is a global variable provided by node which
+// holds absolute path to the file where it is used.
+// (i.e. "/Users/sg/Code/CodeCore/LiveDemos/2017/June/express-demo")
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended: false}));
 
 // making a part of the relative url begin with :, will make
