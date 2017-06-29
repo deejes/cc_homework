@@ -9,3 +9,16 @@
     <link rel="stylesheet" href="/css/index.css" />
   </head>
   <body>
+    <nav>
+      <a href="/">Home</a> |
+      <a href="contact">Contact</a> |
+      <% if (username) { %>
+        <span>Hello, <%= username %>!</span>
+      <% } else { %>
+        Who are you?
+        <form method="POST" action="/username">
+          <input type="text" name="username" />
+          <input type="submit" value="Submit" />
+        </form>
+      <% } %>
+    </nav>

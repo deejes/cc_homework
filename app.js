@@ -10,6 +10,7 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 // Calling the express function will create
 // an instance of a Express web server
@@ -39,6 +40,17 @@ app.use(logger('dev'));
 // (i.e. "/Users/sg/Code/CodeCore/LiveDemos/2017/June/express-demo")
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser());
+
+app.use(function (req, res, next) {
+  const {username} = req.cookies;
+  // const username = req.cookies.username;
+
+  // All properties of res.local are available as variables
+  // inside your views
+  res.locals.username = username;
+  next();
+});
 
 // making a part of the relative url begin with :, will make
 // that matched section available as data in request.params under a
@@ -74,6 +86,24 @@ app.post('/contact', function (request, response) {
   // its data is formatted as a javascript object and it
   // assigned to the body property of request
   response.render('contact', {contact: request.body});
+});
+
+// URL: http://localhost:4545/username HTTP VERB: POST
+app.post('/username', function (req, res) {
+  const {username} = req.body;
+  // 👆 this syntax is named: destructuring. It's a shortcut (syntax sugar)
+  // for the code below
+  // const username = req.body.username;
+  // res.cookie is method added by the cookie-parser
+  // its convenient way to set cookies in the header of the response
+  // - the first argument is the name of the cookie
+  // - the second argument is the value of the cookie
+  // - the third and last argument is object to configure the cookie
+  res.cookie('username', username, {maxAge: 1000*60*60*24});
+  // the maxAge option determines how long a cookie will last in milliseconds
+
+  // res.redirect tells the browser, in the response, to go to the given URL
+  res.redirect('/');
 });
 
 // PORT is uppercased because we intend to be a constant.
