@@ -13,6 +13,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 const home = require('./routes/home');
+const posts = require('./routes/posts');
 
 // Calling the express function will create
 // an instance of a Express web server
@@ -57,6 +58,7 @@ app.use(function (req, res, next) {
 // When use app.use to mount a router file, the first argument
 // is a string that will prefix all uri paths defined inside the router file
 app.use('/', home);
+app.use('/posts', posts);
 
 // PORT is uppercased because we intend to be a constant.
 // It shouldn't be changed after it's declared.
