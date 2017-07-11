@@ -1,5 +1,7 @@
 
 
+let song = prompt('write notes here');
+
 let parseNote = function(inputNote){
   let outputObj = {}
   if (inputNote.indexOf("*") < 0){
@@ -17,14 +19,6 @@ return outputObj
 // console.log(((parseNote("B4"))))
 
 let parseSong = function(inputSong){
-  // let songArray = []
-  // let noteArray = inputSong.split(" ")
-  // // console.log(noteArray.length);
-  // for (let i = 0; i < noteArray.length ; i++) {
-  //   songArray.push(parseNote(noteArray[i]));
-  // }
-
-
   return inputSong.split(' ').map((note) => {
     return parseNote(note);
   });
@@ -34,6 +28,8 @@ let parseSong = function(inputSong){
 // parseSong("D H*4 E A B*2")
 
 let repeatRequest = function(){
+  // console.log('test');
+
   song = prompt('write notes here');
   songs = parseSong(song);
   console.log(songs);
@@ -41,7 +37,6 @@ let repeatRequest = function(){
 
 }
 
-let song = prompt('write notes here');
 let songs = parseSong(song);
 console.log(songs);
 playSong(songs, 250, repeatRequest);

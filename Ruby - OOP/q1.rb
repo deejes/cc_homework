@@ -2,9 +2,17 @@
 
 module HelperMethods
   def titalize(string)
-    return string.split.map(&:capitalize).join(' ') # i know this doesnt exclude
-    #any words, but i could put in a step that create an array and then loops over
-    #it, and capitalizes only words not in a list, using an includes? method.
+    exclusion = ['in','the','of','and','or','from']
+
+
+    titalized = string.split.map(&:capitalize)
+    titalized.each_with_index do |x,v|
+      if exclusion.include?(x.downcase)
+        titalized[v] = x.downcase
+      end
+
+    end
+    return titalized.join(" ")
 
   end
 
@@ -24,5 +32,5 @@ class Animal
 end
 
 
-cat = Animal.new("this is the sentence i am trying to capitalize!")
+cat = Animal.new("these should not be capitalized - in the of and or from")
 cat.capitalized
