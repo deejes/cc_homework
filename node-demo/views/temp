@@ -1,0 +1,15 @@
+<div class="col-md-8">
+  <% tweetArr = ['1','2','3']%>
+  <%if (tweetArr != undefined) {%>
+    <%for (var i = 0; i < tweetArr.length; i++){%>
+      <div class="" style = "border: thin solid black; margin-bottom: 20px">
+        <div style='margin-left:8px'>
+        <h2>Username</h2>
+        <p><%= tweetArr[i] %> </p>
+        <h5><%= new Date() %></h5>
+        </div>
+      </div>
+    <%}%>
+  <%}%>
+
+</div>
