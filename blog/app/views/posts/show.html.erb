@@ -27,4 +27,10 @@
       <p> Content:<%= comment.body %></p>
       <p> Created At: <%= comment.created_at.to_formatted_s(:long)  %></p>
       <br>
+
+      <% if user_signed_in? && can?(:destroy, comment)%>
+      <%= link_to 'Delete', post_comment_path(@post, comment),
+      method: :delete, data: { confirm: 'Are you sure?'} %>
+      <% end %>
+
 <%end%>

@@ -14,7 +14,21 @@
         <a href="/posts">All Posts</a>
         |
         <a href="/posts/new">New Posts</a>
-
+        <% if user_signed_in?%>
+        |
+        <span> Hello <%= current_user.first_name%> </span>
+        |
+        <%= link_to 'Sign Out', session_path(current_user.id), method: :delete %>
+        |
+        <%= link_to 'Edit My Profile', edit_user_path(current_user.id) %>
+        |
+        <%= link_to 'Change Password', edit_user_path(current_user.id) %>
+        <% else %>
+        |
+        <a href="/users/new">Sign Up</a>
+        |
+        <a href="/session/new">Sign In</a>
+        <%end%>
     <%= yield %>
   </body>
 </html>

@@ -3,6 +3,11 @@ Rails.application.routes.draw do
 resources :posts do
   resources :comments
 end
+resource :session
+resources :users
+
+
+
 root 'welcome#index'
 end
 # http://guides.rubyonrails.org/routing.html
