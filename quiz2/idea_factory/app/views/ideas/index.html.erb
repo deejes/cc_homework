@@ -1,0 +1,45 @@
+<div class="container">
+
+  <h1>Welcome to the Idea Factory</h1>
+</div>
+
+
+
+
+<!-- <h1>All Products</h1> -->
+
+<% @ideas.each do |i| %>
+
+
+  <div class="container border ">
+<div class="titular">
+
+  <h3>
+    <%= link_to i.title, idea_path(i) %>
+  </h3>
+</div>
+<div class="bodular hidden">
+
+  <p>
+    <%= i.description  %>
+  </p>
+</div>
+
+  <h6>
+      Reviewer: <%= i.user&.first_name %> <%= i.user&.last_name %>
+  </h6>
+
+  <div class="">
+    <%= link_to('Edit', edit_idea_path(i))     %>
+         |
+             <%= link_to('Delete', idea_path(i), method: :delete) %>
+
+  </div>
+
+
+
+</div>
+  <br>
+
+
+<% end %>
